@@ -26,7 +26,7 @@ def login_page():
         createAccount = st.form_submit_button("Click to create an account!")
         
         if createAccount:
-            st.switch_page(st.Page("pages/create_account.py"))
+            st.switch_page("pages/create_account.py")
 
         if submitted:
             user = check_users(username, password)
@@ -43,10 +43,8 @@ def login_page():
                     'email': user[5]
                 }
 
-                st.switch_page(st.Page("pages/home_page.py"))
+                st.switch_page("pages/home_page.py")
             else:
                 st.error("Invalid username or password")
 
-
 login_page()
-
