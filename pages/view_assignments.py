@@ -51,7 +51,10 @@ for index, row in df.iterrows():
 
     if cols[5].button("View", key=row["id"]):
         st.session_state["selected_assignment"] = row["id"]
-        st.switch_page("pages/assignment_details.py")
+        
+        
+
+        st.switch_page("pages/view_details.py")
 
 
 if st.button("Add Assignment", type="primary"):
