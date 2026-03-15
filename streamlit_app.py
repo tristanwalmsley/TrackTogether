@@ -34,11 +34,18 @@ def login_page():
             if user:
                 st.success("Login successful!")
 
+                st.session_state['user'] = {
+                    'id': user[0],
+                    'username': user[1],
+                    'password': user[2],
+                    'first_name': user[3],
+                    'second_name': user[4],
+                    'email': user[5]
+                }
                 st.session_state['user_id'] = user[0]
-                st.session_state['username'] = user[1]
-
-                st.switch_page("pages/home_page.py")
+                st.switch_page(st.Page("pages/home_page.py"))
             else:
                 st.error("Invalid username or password")
+
 
 login_page()

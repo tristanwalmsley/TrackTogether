@@ -1,19 +1,5 @@
-# 🎈 Blank app template
+# 🎈 Assignment Tracker
 
-A simple Streamlit app template for you to modify!
+Created by Aparna, Tabitha, & Tristan.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
-
-### How to run it on your own machine
-
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+Created for the University of Lancashire Hackathon 2026.

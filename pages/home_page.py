@@ -1,4 +1,18 @@
 import streamlit as st
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("users.db", check_same_thread=False)
+
+userID = st.session_state.get("user_id")
+
+username_query = """
+SELECT username
+FROM users
+WHERE id = ?
+"""
+
+name_df = pd.read_sql_query(username_query, conn, params=(userID,))
 
 st.Page("pages/home_page.py")
 
@@ -20,45 +34,70 @@ with col2:
         st.switch_page(st.Page("pages/my_profile.py"))
 
 st.divider()
-st.markdown("<h1 style='text-align: center;'>Homepage</h1>", unsafe_allow_html=True)
+if not name_df.empty:
+    username = name_df.iloc[0]
+
+    st.markdown(f"<h1 style='text-align: center;'>Welcome {username['username']}</h1>", unsafe_allow_html=True)
+
 st.write("") 
 st.write("") 
-st.write("Welcome to the Assignment Tracker App! This app is designed to help you stay organized and on top of your assignments. You can view your assignments, check the leaderboard, and connect with others. Let's get started!")
-st.title("Your overall progress")
-progress = st.progress(0)
 
-for i in range(100):
-    progress.progress(i + 1)
+topTextCols = st.columns([2.5,8,2.5])
 
-st.success("Assignments all completed!")
+conn = sqlite3.connect("assignments.db", check_same_thread=False)
+
+query = """
+SELECT progress
+FROM assignments
+WHERE user_id = ?
+"""
+
+df = pd.read_sql_query(query, conn, params=(userID,))
+
+if not df.empty:
+    overall_progress = int(df["progress"].mean())
+else:
+    overall_progress = 0
+
+topTextCols[1].title("Your overall progress")
+
+topTextCols[1].progress(overall_progress)
+
+topTextCols[1].markdown(f"{overall_progress}% complete")
+
+if overall_progress == 100:
+    st.success("🎉 All assignments completed!")
+    st.balloons()
 
 st.write("")
 st.write("")
 
-col1, col2, col3 = st.columns(3)
+cols = st.columns([3.2,4.4,4.4,4.4])
 
-with col1:
+with cols[1]:
     if st.button("View Assignments"):
      st.switch_page(st.Page("pages/view_assignments.py"))
-with col2:
+with cols[2]:
     if st.button("View Leaderboard"):
      st.switch_page(st.Page("pages/view_leaderboard.py"))
-with col3:
+with cols[3]:
     if st.button("Connect"):
      st.switch_page(st.Page("pages/connect.py"))
 
-
 st.write("")
 st.write("")
 
-st.write("Assignment Tracker helps you stay organised by keeping all your tasks and deadlines in one place. Add your assignments, track your progress, and never miss a due date again. Whether you're juggling multiple subjects or just need a little extra help staying on top of things, this app has got you covered.")
+bottomTextCols = st.columns([2.5,8,2.5])
+
+bottomTextCols[1].write("Welcome to the Assignment Tracker App! This app is designed to help you stay organized and on top of your assignments. You can view your assignments, check the leaderboard, and connect with others. Let's get started!")
 
 st.write("")
 
-st.write("With Assignment Tracker, you can easily add new assignments, set due dates, and mark tasks as complete. Stay on top of your workload and never feel overwhelmed again. Our simple and clean interface makes it easy to see exactly what needs to be done and when.Whether you're a student managing coursework or just someone who wants to stay productive, Assignment Tracker is designed to make your life easier. Track multiple subjects, view your progress, and celebrate when everything is done. Your deadlines are our priority.")
+bottomTextCols[1].write("Assignments are linked to your account, so you can easily see your own workload and how far through it you are. As you update progress or complete assignments, your overall completion will increase.")
+
+st.write("")
+
+bottomTextCols[1].write("You can also check the Leaderboard to see how your progress compares with other users. It’s a simple way to stay motivated and keep moving forward with your work.")
+
 st.write("")
 st.divider()
-st.balloons()
-
-
-
