@@ -66,7 +66,7 @@ def show_header():
         st.write("")
         st.write("")
         if st.button("💬  Connect"):
-            st.switch_page("pages/view_leaderboard.py")
+            st.switch_page("pages/connect.py")
     with col6:
         st.write("")
         st.write("")

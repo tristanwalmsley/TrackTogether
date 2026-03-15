@@ -17,10 +17,11 @@ st.set_page_config(
  
 show_header()
  
- 
 user_id = st.session_state.get("user_id")
-#module_code = st.session_state.get("module_code")
- 
+
+if (user_id == None):
+    st.switch_page("streamlit_app.py") 
+
 # Connect to users database to get username
 users_conn = sqlite3.connect("users.db")
 cursor = users_conn.cursor()

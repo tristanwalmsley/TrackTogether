@@ -14,10 +14,9 @@ def check_users(username, password):
     return user
 
 def login_page():
-    st.title("Welcome to your assignment tracker, please login below!")
+    st.title("Welcome to Track Together, please login below!")
 
     with st.form("login_form"):
-        st.write("Login Form:")
         username = st.text_input("Username", placeholder = "First Name Here...")
         password = st.text_input("Password:", type = "password", placeholder = "Password Here...")
 

@@ -1,5 +1,21 @@
 import streamlit as st
 import sqlite3
+from header import show_header
+
+# ---------------------------------------------------
+# Page configuration
+# ---------------------------------------------------
+st.set_page_config(
+    page_title="Track Together",
+    page_icon="👾",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'About': "# Track Together. Made by Aparna, Tabitha, Tristan."
+    }
+)
+
+show_header()
 
 conn = sqlite3.connect("chat.db")
 cursor = conn.cursor()
@@ -11,6 +27,10 @@ st.Page("pages/chat_message.py")
 
 st.title("Chat:")
 user_id = st.session_state.get("user_id")
+
+if (user_id == None):
+    st.switch_page("streamlit_app.py")
+
 module_code = st.session_state.get("module_code")
 
 cursor2.execute("SELECT fName FROM users WHERE id = ?", (user_id,))
