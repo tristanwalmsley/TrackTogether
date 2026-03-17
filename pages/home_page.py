@@ -88,4 +88,4 @@ bottomTextCols[1].write("You can also check the Leaderboard to see how your prog
 st.write("")
 st.divider()
 
-st.caption("Version 1.1.2")
+st.caption("Version 1.1.3")
