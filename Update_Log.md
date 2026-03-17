@@ -1,12 +1,13 @@
 [Back to Main GitHub Page](https://github.com/CDarthGaming/TrackTogether/tree/main)
 
+## Minor Patch - Version 1.1.3
+* Profile picture uploads are now private & innacessible by others
+
 ## Minor Patch - Version 1.1.2
 * Added caption notices to the bottomn of the login & home pages
 
-
 ## Minor Patch - Version 1.1.1
 * Fixed missing python library dependancies
-
 
 # Major System Overhaul - Version 1.1
 
