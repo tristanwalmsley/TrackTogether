@@ -115,6 +115,8 @@ with st.form("profile_form"):
 
         # Save profile picture
         if uploaded_file:
+            os.makedirs("uploads", exist_ok=True)
+
             file_path = f"uploads/user_{user_id}.png"
 
             with open(file_path, "wb") as f:
