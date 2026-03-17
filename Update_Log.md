@@ -3,12 +3,10 @@
 ## Minor Patch - Version 1.1.2
 * Added caption notices to the bottomn of the login & home pages
 
-<br> </br>
 
 ## Minor Patch - Version 1.1.1
 * Fixed missing python library dependancies
 
-<br> </br>
 
 # Major System Overhaul - Version 1.1
 
